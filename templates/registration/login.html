@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block login %}
+
+{% endblock %}
+
+{% block content %}
+
+    {% if form.errors %}
+        <div class="alert alert-error">
+            Ошибка! Вы неправильно ввели логин или пароль
+        </div>
+    {% endif %}
+
+    <form action='.' method='post'>
+        {% csrf_token %}
+    <label for="username">Логин:</label>
+    <input type="text" name="username" value="" id="username">
+    <label for="password">Пароль:</label>
+    <input type="password" name="password" value="" id="password">
+
+    <input type="submit" value="login" class="btn btn-primary" />
+    <input type="hidden" name="next" value="{{ next|escape }}" />
+  </form>
+
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}

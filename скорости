@@ -1,0 +1,189 @@
+alexey@alexey-UX31A:~/mysite1$ ab -c 10 -n 10000 http://http://127.0.0.1/
+This is ApacheBench, Version 2.3 <$Revision: 655654 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking http: (be patient)
+apr_sockaddr_info_get() for http:: No such file or directory (2)
+alexey@alexey-UX31A:~/mysite1$ ab -c 10 -n 10000 http://127.0.0.1/
+This is ApacheBench, Version 2.3 <$Revision: 655654 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+Completed 1000 requests
+Completed 2000 requests
+Completed 3000 requests
+Completed 4000 requests
+Completed 5000 requests
+Completed 6000 requests
+Completed 7000 requests
+Completed 8000 requests
+Completed 9000 requests
+Completed 10000 requests
+Finished 10000 requests
+
+
+Server Software:        nginx/1.4.3
+Server Hostname:        127.0.0.1
+Server Port:            80
+
+Document Path:          /
+Document Length:        1995 bytes
+
+Concurrency Level:      10
+Time taken for tests:   23.628 seconds
+Complete requests:      10000
+Failed requests:        0
+Write errors:           0
+Non-2xx responses:      10000
+Total transferred:      21460000 bytes
+HTML transferred:       19950000 bytes
+Requests per second:    423.22 [#/sec] (mean)
+Time per request:       23.628 [ms] (mean)
+Time per request:       2.363 [ms] (mean, across all concurrent requests)
+Transfer rate:          886.95 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       1
+Processing:     3   24  20.7     17     203
+Waiting:        3   24  20.7     17     203
+Total:          3   24  20.7     17     203
+
+Percentage of the requests served within a certain time (ms)
+  50%     17
+  66%     25
+  75%     31
+  80%     35
+  90%     50
+  95%     65
+  98%     87
+  99%    100
+ 100%    203 (longest request)
+
+
+
+
+
+
+
+
+
+
+
+alexey@alexey-UX31A:~/mysite1$ ab -c 10 -n 10000 http://127.0.0.1:8080/
+This is ApacheBench, Version 2.3 <$Revision: 655654 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+Completed 1000 requests
+Completed 2000 requests
+Completed 3000 requests
+Completed 4000 requests
+Completed 5000 requests
+Completed 6000 requests
+Completed 7000 requests
+Completed 8000 requests
+Completed 9000 requests
+Completed 10000 requests
+Finished 10000 requests
+
+
+Server Software:        Apache/2.2.22
+Server Hostname:        127.0.0.1
+Server Port:            8080
+
+Document Path:          /
+Document Length:        2000 bytes
+
+Concurrency Level:      10
+Time taken for tests:   23.989 seconds
+Complete requests:      10000
+Failed requests:        0
+Write errors:           0
+Non-2xx responses:      10000
+Total transferred:      21620000 bytes
+HTML transferred:       20000000 bytes
+Requests per second:    416.86 [#/sec] (mean)
+Time per request:       23.989 [ms] (mean)
+Time per request:       2.399 [ms] (mean, across all concurrent requests)
+Transfer rate:          880.13 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.1      0       1
+Processing:     3   24  19.4     18     162
+Waiting:        3   16  13.6     12     161
+Total:          3   24  19.4     18     162
+
+Percentage of the requests served within a certain time (ms)
+  50%     18
+  66%     26
+  75%     31
+  80%     36
+  90%     50
+  95%     63
+  98%     80
+  99%     94
+ 100%    162 (longest request)
+
+
+alexey@alexey-UX31A:~$ ab -c 10 -n 10000 http://127.0.0.1:8080/
+This is ApacheBench, Version 2.3 <$Revision: 655654 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+Completed 1000 requests
+Completed 2000 requests
+Completed 3000 requests
+Completed 4000 requests
+Completed 5000 requests
+Completed 6000 requests
+Completed 7000 requests
+Completed 8000 requests
+Completed 9000 requests
+Completed 10000 requests
+Finished 10000 requests
+
+
+Server Software:        Apache/2.2.22
+Server Hostname:        127.0.0.1
+Server Port:            8080
+
+Document Path:          /
+Document Length:        3145 bytes
+
+Concurrency Level:      10
+Time taken for tests:   53.268 seconds
+Complete requests:      10000
+Failed requests:        0
+Write errors:           0
+Non-2xx responses:      10000
+Total transferred:      33070000 bytes
+HTML transferred:       31450000 bytes
+Requests per second:    187.73 [#/sec] (mean)
+Time per request:       53.268 [ms] (mean)
+Time per request:       5.327 [ms] (mean, across all concurrent requests)
+Transfer rate:          606.27 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.1      0       1
+Processing:     4   53  53.3     34     404
+Waiting:        4   45  49.4     23     404
+Total:          4   53  53.3     34     404
+
+Percentage of the requests served within a certain time (ms)
+  50%     34
+  66%     63
+  75%     83
+  80%     93
+  90%    121
+  95%    155
+  98%    204
+  99%    234
+ 100%    404 (longest request)
+

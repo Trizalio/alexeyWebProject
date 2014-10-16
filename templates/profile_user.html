@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+        <div class="tabbable"> <!-- Only required for left/right tabs -->
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#tab1" data-toggle="tab">Профиль</a></li>
+                <li><a href="#tab2" data-toggle="tab">Вопросы</a></li>
+                <li><a href="#tab3" data-toggle="tab">Ответы</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="tab1">
+                    <p><div class="page-header">
+                    <h3>Логин: <small><strong>{{ name }}</strong></small></h3>
+                </div></p>
+                    <p><div class="page-header">
+                    <h3>Email: <small><strong>{{ email}}</strong></small></h3>
+                </div></p>
+                </div>
+                <div class="tab-pane" id="tab2">
+                    <p> {% if q_list %}
+
+                        {% for q in q_list %}
+
+                            <dl>
+                                <div class="well">
+                                <dt><h2>{{ q.header }}</h2></dt>
+                                <dd>
+                                    <p>  {{ q.text }}</p>
+                                    <div class="btn-group">
+                                        {% if anonim %}
+                                        <a href="/add/answer/{{ q.id }}/anonim/" class="btn">Посмотреть ответы</a>
+
+                                        {% else %}
+                                            <a href="/add/answer/{{ q.id }}/" class="btn">Посмотреть ответы</a>
+                                        {% endif %}
+                                    </div>
+                                    <p><a href="/accounts/profile/{{ q.creator }}/" class="btn btn-link">{{creator}}</a></p>
+                                    <span class="label label">Добавлен {{q.creationdate}}</span>
+                                </dd>
+                                </div>
+                            </dl>
+
+                        {% endfor %}
+
+                    {% else %}
+                        <h4><p class="text-error">Пока нет ни одного вопроса.</p></h4>
+                    {% endif %}
+                </p>
+
+
+    <div class="span9 offset1">
+    <div class="pagination pagination-centered">
+    <span class="pager">
+        {% if q_list.has_previous %}
+            <li><a href="?page={{ q_list.previous_page_number }}">Назад</a></li>
+        {% endif %}
+
+        <span class="current">
+            Страница {{ q_list.number }} из {{ q_list.paginator.num_pages }}.
+        </span>
+
+        {% if q_list.has_next %}
+            <li> <a href="?page={{ q_list.next_page_number }}">Далее</a></li>
+        {% endif %}
+    </span>
+    </div>
+    </div>
+
+                </div>
+
+                <div class="tab-pane" id="tab3">
+                <p>
+                    {% if a_list %}
+                        <ul>
+                            {% for a in a_list %}
+                                <li>
+                                    <div class="well">
+                                    <h3><em>{{ a.text }}</em></h3>
+                                        <div class="btn-group">
+                                            {% if anonim %}
+                                                <a href="/add/answer/{{ a.question_id}}/anonim/" class="btn">Перейти к вопросу</a>
+                                            {% else %}
+                                                <a href="/add/answer/{{ a.question_id }}/" class="btn">Перейти к вопросу</a>
+                                            {% endif %}
+                                        </div>
+                                    <p><span class="label label">Добавлен {{a.date}}</span></p>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <h4><p class="text-error">Пока нет ни одного ответа.</p></h4>
+                    {% endif %}
+                </p>
+
+    <div class="span9 offset1">
+    <div class="pagination pagination-centered">
+    <span class="pager">
+        {% if a_list.has_previous %}
+            <li><a href="?page={{ a_list.previous_page_number }}">Назад</a></li>
+        {% endif %}
+
+        <span class="current">
+            Страница {{ a_list.number }} из {{ a_list.paginator.num_pages }}.
+        </span>
+
+        {% if a_list.has_next %}
+            <li> <a href="?page={{ a_list.next_page_number }}">Далее</a></li>
+        {% endif %}
+    </span>
+    </div>
+    </div>
+
+             </div>
+         </div>
+    </div>
+
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}

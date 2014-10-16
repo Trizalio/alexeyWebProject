@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}Ответ на вопрос{% endblock %}
+
+{% block content %}
+
+     {% if form.errors %}
+        <div class="alert alert-error">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Ошибка!</strong> Пожалуйста, исправьте указанные ниже поля.
+        </div>
+    {% endif %}
+
+    {% if ok_answer %}
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Поздравляем!Ответ успешно добавлен.</strong>
+        </div>
+    {% endif %}
+
+
+    <h3><strong>Вопрос:</strong></h3>
+    <div class="well">
+    <p>
+    <h3>{{ q.header }}</h3>
+    <h5>{{ q.text }}</h5>
+    </p>
+    </div>
+    </div>
+    <h3><strong>Ответы:</strong></h3>
+
+    {% if a_list %}
+        <ul>
+            {% for a in a_list %}
+                <li>
+                    <div class="well">
+                    <h5><em>{{ a.text }}</em></h5>
+                    <span class="label label">Добавлен {{a.date}}</span>
+
+                    <a href="/accounts/profile/{{ q.creator_id }}/" class="btn btn-link">Посмотреть автора</a>
+                    {% if a.correctanswer %}
+                        <span class="label label-success">Правильный ответ</span>
+                    {% endif %}
+
+                    </div>
+                    </div>
+                </li>
+
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h4><p class="text-error">Пока нет ни одного ответа.</p></h4>
+    {% endif %}
+
+    {% if not anonim and not ok_answer%}
+    <h3><strong>Ваш ответ</strong></h3>
+    <form action="/add/answer/{{question_id}}/" method="post">
+        {% csrf_token %}
+        <div class="well">
+        <table>
+            {{ form.as_table }}
+        </table>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Ответить</button>
+            <a href="/home/" class="btn btn-primary">Отмена</a>
+        </div>
+        </div>
+    </form>
+    {% endif %}
+    {% if anonim or ok_answer%}
+        <a href="/home/" class="btn-large btn-primary">На главную</a>
+    {% endif %}
+
+{% endblock %}
+
+{% block footer %}
+    <footer>
+        <div class="span9 offset1">
+            <div class="pagination">
+        <span class="step-links">
+        {% if a_list.has_previous %}
+            <a href="?page={{ a_list.previous_page_number }}">Назад</a>
+        {% endif %}
+
+            <span class="current">
+            Страница {{ a_list.number }} из {{ a_list.paginator.num_pages }}.
+        </span>
+
+            {% if a_list.has_next %}
+                <a href="?page={{ a_list.next_page_number }}">Далее</a>
+            {% endif %}
+
+        </span>
+            </div>
+        </div>
+    </footer>
+{% endblock %}
